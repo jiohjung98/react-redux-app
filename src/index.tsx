@@ -7,6 +7,7 @@ import { applyMiddleware, createStore } from 'redux';
 import counter from '../src/reducers/index'
 import rootReducer from '../src/reducers/index';
 import { Provider } from 'react-redux'
+import thunk from 'redux-thunk';
 
 
 // store.dispatch({
@@ -20,7 +21,7 @@ const loggerMiddleware = (store: any) => (next: any) => (action: any) => {
   console.log("next", next);
 }
 
-const middleware = applyMiddleware(loggerMiddleware)
+const middleware = applyMiddleware(thunk, loggerMiddleware)
 const store = createStore(rootReducer, middleware)
 
 console.log('store.getState', store.getState())
