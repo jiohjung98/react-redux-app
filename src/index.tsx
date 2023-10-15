@@ -3,17 +3,25 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import counter from '../src/reducers/index'
 import rootReducer from '../src/reducers/index';
 import { Provider } from 'react-redux'
 
-const store = createStore(rootReducer)
 
 // store.dispatch({
 //   type: "ADD_TODO",
 //   text: "USE REDUX"
 // })
+
+const loggerMiddleware = (store: any) => (next: any) => (action: any) => {
+  console.log("store", store);
+  console.log("action", action);
+  console.log("next", next);
+}
+
+const middleware = applyMiddleware(loggerMiddleware)
+const store = createStore(rootReducer, middleware)
 
 console.log('store.getState', store.getState())
 
