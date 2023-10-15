@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { createStore } from 'redux';
 import counter from '../src/reducers/index'
 import rootReducer from '../src/reducers/index';
+import { Provider } from 'react-redux'
 
 const store = createStore(rootReducer)
 
@@ -22,11 +23,13 @@ const root = ReactDOM.createRoot(
 
 const render = () => root.render(
   <React.StrictMode>
+    <Provider store={store}>
     <App 
       value={store.getState()}
       onIncrement={() => store.dispatch({type: "INCREMENT"})}
       onDecrement={() => store.dispatch({type: "DECREMENT"})}
     />
+    </Provider>
   </React.StrictMode>
 );
 
