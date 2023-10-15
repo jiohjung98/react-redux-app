@@ -5,8 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createStore } from 'redux';
 import counter from '../src/reducers/index'
+import rootReducer from '../src/reducers/index';
 
-const store = createStore(counter)
+const store = createStore(rootReducer)
+
+store.dispatch({
+  type: "ADD_TODO",
+  text: "USE REDUX"
+})
+
+console.log('store.getState', store.getState())
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
